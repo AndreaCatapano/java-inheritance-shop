@@ -60,10 +60,14 @@ public class Product {
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price;
+        if (price.compareTo(BigDecimal.ZERO) > 0) {
+            this.price = price;
+        }
     }
 
     public void setTax(BigDecimal tax) {
-        this.tax = tax;
+        if (price.compareTo(BigDecimal.ZERO) >= 0) {
+            this.tax = tax;
+        }
     }
 }

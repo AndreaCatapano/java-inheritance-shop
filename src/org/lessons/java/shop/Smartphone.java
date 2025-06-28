@@ -24,4 +24,13 @@ public class Smartphone extends Product {
     public int getMemorySize() {
         return memorySize;
     }
+
+    // SETTER
+
+    public void setMemorySize(int memorySize) {
+        if (memorySize > 0) {
+            this.memorySize = memorySize;
+        }
+    }
+
 }
