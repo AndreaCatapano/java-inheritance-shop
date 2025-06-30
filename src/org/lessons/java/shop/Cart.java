@@ -25,7 +25,9 @@ public class Cart {
             } else {
                 System.out.println("Inserisci un elemento tra Cuffie, Televisione o Smartphone");
             }
-
+        }
+        if (productIndex > 0) {
+            showProducts();
         }
     }
 
@@ -150,6 +152,13 @@ public class Cart {
             } else if (continueShopStr.toLowerCase().equals("si")) {
                 righAnswer = false;
             }
+        }
+    }
+
+    public static void showProducts() {
+        for (int i = 0; i < products.length; i++) {
+            System.out.println(products[i].toString());
+            System.out.println("-----");
         }
     }
 
