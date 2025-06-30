@@ -73,11 +73,16 @@ public class Product {
 
     // UTILITY
 
-    protected void showInfoProduct() {
-        System.out.println("Prodotto: " + getName() + " - " + getBrand());
-        System.out.println("Prezzo: €" + getPrice() + " (tasse: " + getTax().multiply(new BigDecimal(100)) + "%)");
-        System.out.println("Prezzo finale: €" + getPrice().add(getPrice().multiply(getTax())));
-        System.out.println("S/N: " + getSerialNumber());
-        System.out.println("---");
+    public String toString() {
+        return String.format("Il nome del prodotto è %s del brand %s\n" +
+                "Prezzo: €%s (tasse: %s%%)\n" +
+                "Prezzo finale: €%s\n" +
+                "S/N: %s",
+                getName(),
+                getBrand(),
+                getPrice(),
+                getTax().multiply(new BigDecimal(100)),
+                getPrice().add(getPrice().multiply(getTax())),
+                getSerialNumber());
     }
 }

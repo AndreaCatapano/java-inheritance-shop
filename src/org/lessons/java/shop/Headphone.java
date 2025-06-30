@@ -40,8 +40,9 @@ public class Headphone extends Product {
     }
 
     @Override
-    protected void showInfoProduct() {
-        super.showInfoProduct();
-        System.out.println("Color: " + getColor() + " Wireless: " + isWireless());
+    public String toString() {
+        return super.toString() + "\n" +
+                "Colore: " + getColor() + "\n" +
+                "Wireless: " + (isWireless() ? "Sì" : "No");
     }
 }

@@ -8,8 +8,9 @@ public class Main {
         TV smartSamsung = new TV("samsung full hd", "samsung", new BigDecimal("2999"), 60, true);
         Headphone airpods = new Headphone("airpods", "apple", new BigDecimal("199"), "white", true);
 
-        iphone.showInfoProduct();
-        smartSamsung.showInfoProduct();
-        airpods.showInfoProduct();
+        System.out.println(iphone);
+        System.out.println(smartSamsung);
+        System.out.println(airpods);
+
     }
 }

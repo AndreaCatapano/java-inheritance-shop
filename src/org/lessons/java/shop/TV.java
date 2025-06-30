@@ -34,9 +34,10 @@ public class TV extends Product {
     }
 
     @Override
-    protected void showInfoProduct() {
-        super.showInfoProduct();
-        System.out.println("Inches: " + getInches() + " Smart TV: " + isSmart());
+    public String toString() {
+        return super.toString() + "\n" +
+                "Pollici: " + getInches() + "\n" +
+                "Smart TV: " + (isSmart() ? "Sì" : "No");
     }
 
 }
