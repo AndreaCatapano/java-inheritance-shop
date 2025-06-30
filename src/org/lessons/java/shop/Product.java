@@ -13,11 +13,11 @@ public class Product {
     Random rand = new Random();
 
     public Product(String name, String brand, BigDecimal price) {
-        this.serialNumber = rand.nextInt(999999);
+        this.serialNumber = 100000 + rand.nextInt(999999);
         this.name = name;
         this.brand = brand;
         this.price = price;
-        this.tax = new BigDecimal(0.22);
+        this.tax = new BigDecimal("0.22");
     }
 
     public Product(String name, String brand, BigDecimal price, BigDecimal tax) {
@@ -69,5 +69,15 @@ public class Product {
         if (price.compareTo(BigDecimal.ZERO) >= 0) {
             this.tax = tax;
         }
+    }
+
+    // UTILITY
+
+    protected void showInfoProduct() {
+        System.out.println("Prodotto: " + getName() + " - " + getBrand());
+        System.out.println("Prezzo: €" + getPrice() + " (tasse: " + getTax().multiply(new BigDecimal(100)) + "%)");
+        System.out.println("Prezzo finale: €" + getPrice().add(getPrice().multiply(getTax())));
+        System.out.println("S/N: " + getSerialNumber());
+        System.out.println("---");
     }
 }

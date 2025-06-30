@@ -33,4 +33,10 @@ public class Smartphone extends Product {
         }
     }
 
+    @Override
+    protected void showInfoProduct() {
+        super.showInfoProduct();
+        System.out.println("IMEI: " + getIMEIcode() + " Memory: " + getMemorySize() + "GB");
+    }
+
 }

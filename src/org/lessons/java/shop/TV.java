@@ -18,7 +18,7 @@ public class TV extends Product {
         return inches;
     }
 
-    public boolean getIsSmart() {
+    public boolean isSmart() {
         return isSmart;
     }
 
@@ -31,6 +31,12 @@ public class TV extends Product {
 
     public void setSmart(boolean isSmart) {
         this.isSmart = isSmart;
+    }
+
+    @Override
+    protected void showInfoProduct() {
+        super.showInfoProduct();
+        System.out.println("Inches: " + getInches() + " Smart TV: " + isSmart());
     }
 
 }
