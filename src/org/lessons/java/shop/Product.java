@@ -1,6 +1,7 @@
 package org.lessons.java.shop;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Random;
 
 public class Product {
@@ -73,6 +74,17 @@ public class Product {
 
     // UTILITY
 
+    public BigDecimal totalPrice(BigDecimal price, BigDecimal tax, boolean hasFidelityCard) {
+        BigDecimal priceTax = price.add(price.multiply(tax).setScale(2, RoundingMode.DOWN));
+
+        if (!hasFidelityCard) {
+            return priceTax;
+        }
+
+        BigDecimal discount = priceTax.multiply(new BigDecimal("0.02"));
+        return priceTax.subtract(discount).setScale(2, RoundingMode.DOWN);
+    }
+
     public String toString() {
         return String.format("Il nome del prodotto è %s del brand %s\n" +
                 "Prezzo: €%s (tasse: %s%%)\n" +
@@ -82,7 +94,7 @@ public class Product {
                 getBrand(),
                 getPrice(),
                 getTax().multiply(new BigDecimal(100)),
-                getPrice().add(getPrice().multiply(getTax())),
+                totalPrice(price, tax, false),
                 getSerialNumber());
     }
 }

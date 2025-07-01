@@ -7,10 +7,17 @@ public class Cart {
 
     private static Scanner scan = new Scanner(System.in);
     private static boolean isComplete = false;
+    private static boolean hasFidelityCard = false;
     private static int productIndex = 0;
     private static Product[] products = new Product[0];
 
     public static void main(String[] args) {
+        System.out.print("Hai la card fidelity card? Si/No ");
+        String hasFidelityCardStr = scan.nextLine().trim();
+
+        if (hasFidelityCardStr.toLowerCase().equals("si")) {
+            hasFidelityCard = true;
+        }
 
         while (!isComplete) {
             System.out.print("Inserisci un prodotto tra Smartphone, Cuffie o Televisioni: ");
@@ -28,6 +35,7 @@ public class Cart {
         }
         if (productIndex > 0) {
             showProducts();
+            System.out.println("il prezzo finale è di:" + " " + checkout());
         }
     }
 
@@ -50,6 +58,7 @@ public class Cart {
 
         if (price.compareTo(BigDecimal.ZERO) <= 0 || memorySize <= 0) {
             System.out.println("Prezzo e memoria devono essere maggiori di zero!");
+            return;
         }
 
         Smartphone newSmartphone = new Smartphone(name, brand, price, memorySize);
@@ -85,6 +94,7 @@ public class Cart {
 
         if (price.compareTo(BigDecimal.ZERO) <= 0 || inches <= 0) {
             System.out.println("Prezzo e memoria devono essere maggiori di zero!");
+            return;
         }
 
         TV newTV = new TV(name, brand, price, inches, isSmart);
@@ -120,6 +130,7 @@ public class Cart {
 
         if (price.compareTo(BigDecimal.ZERO) <= 0) {
             System.out.println("Prezzo e memoria devono essere maggiori di zero!");
+            return;
         }
 
         Headphone newHeadphone = new Headphone(name, brand, price, color, isWireless);
@@ -153,6 +164,15 @@ public class Cart {
                 righAnswer = false;
             }
         }
+    }
+
+    public static BigDecimal checkout() {
+        BigDecimal total = new BigDecimal("0");
+        for (int i = 0; i < products.length; i++) {
+            total = total.add(products[i].totalPrice(products[i].getPrice(), products[i].getTax(), hasFidelityCard));
+        }
+
+        return total;
     }
 
     public static void showProducts() {
