@@ -51,7 +51,7 @@ public class TV extends Product {
 
         BigDecimal discount = priceTax.multiply(new BigDecimal("0.02"));
 
-        if (!isSmart) {
+        if (!this.isSmart) {
             discount = priceTax.multiply(new BigDecimal("0.05"));
         }
         return priceTax.subtract(discount).setScale(2, RoundingMode.DOWN);

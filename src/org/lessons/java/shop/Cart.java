@@ -7,16 +7,20 @@ public class Cart {
 
     private static Scanner scan = new Scanner(System.in);
     private static boolean isComplete = false;
-    private static boolean hasFidelityCard = false;
     private static int productIndex = 0;
     private static Product[] products = new Product[0];
+    private static FidelityCard fidelityCard;
 
     public static void main(String[] args) {
         System.out.print("Hai la card fidelity card? Si/No ");
         String hasFidelityCardStr = scan.nextLine().trim();
 
         if (hasFidelityCardStr.toLowerCase().equals("si")) {
-            hasFidelityCard = true;
+            System.out.print("Inserisci il numero di carta fedeltà? (esempio: 11111) ");
+            int numberOfNumString = scan.nextInt();
+            if (FidelityCard.checkNumberFidelityCard(numberOfNumString)) {
+                fidelityCard = new FidelityCard(numberOfNumString);
+            }
         }
 
         while (!isComplete) {
@@ -159,6 +163,7 @@ public class Cart {
             String continueShopStr = scan.nextLine().trim();
             if (continueShopStr.toLowerCase().equals("no")) {
                 isComplete = true;
+                System.out.println("-----");
                 righAnswer = false;
             } else if (continueShopStr.toLowerCase().equals("si")) {
                 righAnswer = false;
@@ -167,9 +172,12 @@ public class Cart {
     }
 
     public static BigDecimal checkout() {
+        System.out.println("DEBUG: Calcolo sconti con fidelity card = "
+                + (fidelityCard != null ? fidelityCard.haveDiscount : false));
         BigDecimal total = new BigDecimal("0");
         for (int i = 0; i < products.length; i++) {
-            total = total.add(products[i].totalPrice(products[i].getPrice(), products[i].getTax(), hasFidelityCard));
+            total = total.add(products[i].totalPrice(products[i].getPrice(), products[i].getTax(),
+                    fidelityCard != null ? fidelityCard.haveDiscount : false));
         }
 
         return total;

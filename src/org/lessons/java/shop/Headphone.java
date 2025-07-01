@@ -57,7 +57,7 @@ public class Headphone extends Product {
 
         BigDecimal discount = priceTax.multiply(new BigDecimal("0.02"));
 
-        if (!isWireless) {
+        if (!this.isWireless) {
             discount = priceTax.multiply(new BigDecimal("0.07"));
         }
         return priceTax.subtract(discount).setScale(2, RoundingMode.DOWN);
